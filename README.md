@@ -67,11 +67,12 @@ Linux és Mac esetén a Docker Desktop telepítése egyszerű, csak letöltjük 
 Ha Azure VM-en szeretnénk használni a Docker Desktop-ot, akkor a WSL 2 telepítése szükséges. Ehhez olyan géptípusra van szükségünk, amely támogatja a virtualizációt. Ilyen például az Azure Dv3 vagy Ev3 virtuális gépek.
 
 1. A létrehozásnál az alábbiakra kell figyelni (másképpen, nem fog működni a Docker Desktop):
+
    - Biztonság típua: **Standard**
    - Kép:
-      - **Windows Server 2022 Datacenter - x64 Gen2**
-      - **Windows 11**
-   - Méret: például **Standard D2s v3**   
+     - **Windows Server 2022 Datacenter - x64 Gen2**
+     - **Windows 11**
+   - Méret: például **Standard D2s v3**
 
 2. Lépj be a gépbe RDP-n keresztül.
 3. Nyiss egy PowerShell-t rendszergazdaként.
@@ -135,6 +136,14 @@ wsl --install -d Ubuntu-24.04
   - Teljes Docker funkcionalitás (images, DockerHub)
   - Helyi Kubernetes (K8s) szerver
   - Kiegészítők (monitorozás, egyéb cluster megoldások)
+
+- **Docker képek elérési útja**
+
+   - Ubuntu: `/var/lib/docker/`
+   - Fedora: `/var/lib/docker/`
+   - Debian: `/var/lib/docker/`
+   - Windows: `C:\ProgramData\DockerDesktop` vagy `C:\Users\{felhasználónév}\AppData\Local\Docker`
+   - MacOS: `~/Library/Containers/com.docker.docker/Data/vms/0/`
 
 ## Docker parancsok
 
@@ -322,7 +331,6 @@ docker-compose down
 ## Docker alapú alkalmazás saját képből
 
 Jelenleg Azure Container Registry (ACR) szolgáltatásban tároljuk a Docker képeket, amelyeket a GitHub Actions segítségével automatizáltan telepítünk az Azure Webalkalmazásba.
-
 
 ## Képek tárolása Azure-ban (ACR)
 
