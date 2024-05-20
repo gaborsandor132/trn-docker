@@ -1,4 +1,4 @@
-name: Kód2 (python-flask-app-02) - Épít és feltölt
+name: Kód2 (python-flask-app-03) - Épít és feltölt
 # Kód4 példához - Épít és feltölt Docker image-t Azure Container Registry-be
 
 on:
@@ -6,13 +6,13 @@ on:
     branches:
       - main
     paths:
-      - "Kod2/02/**"
+      - "Kod2/03/**"
   pull_request:
     paths:
-      - "Kod2/02/**"
+      - "Kod2/03/**"
 
 env:
-  APP_NAME: python-flask-app-02 # Alkalmazás képfájl neve
+  APP_NAME: gaborsandor132-python-flask-app-03 # Alkalmazás képfájl neve
 
 jobs:
   test:
@@ -21,23 +21,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
       - name: Kód letöltése
         uses: actions/checkout@v4
       - name: Python beállítása
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
-          architecture: 'x64'
+          python-version: "3.11"
+          architecture: "x64"
       - name: Python verzió megjelenítése
         run: python -c "import sys; print(sys.version)"
       - name: Python csomagok telepítése
         run: |
-          cd Kod2/02
+          cd Kod2/03
           pip install -r requirements.txt
       - name: Tesztelés
         run: |
-          cd Kod2/02
+          cd Kod2/03
           python -m unittest test_app.py
 
   deploy:
@@ -46,7 +45,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
       - name: Kód letöltése
         uses: actions/checkout@v4
 
@@ -70,8 +68,8 @@ jobs:
       - name: Épít és feltölt
         uses: docker/build-push-action@v5
         with:
-          context: ./Kod2/02
-          file: ./Kod2/02/Dockerfile
+          context: ./Kod2/03
+          file: ./Kod2/03/Dockerfile
           push: true
           platforms: linux/amd64
           tags: ${{ steps.meta.outputs.tags }}
